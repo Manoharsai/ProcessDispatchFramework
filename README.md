@@ -8,3 +8,15 @@ A collection of assets that enable the asynchronous execution of Blue Prism proc
 For specific information about how to implement this framework, please refer to the included <b><i>Process Dispatch Framework User Guide</i></b>.
 
 If you experience any problems with the framework open an issue. You can also visit the [Blue Prism DX Developer Community](https://blueprism.connectedcommunity.org/communities/communities/community-home?CommunityKey=9c2bf38f-bb37-4911-b77b-6260ba750957) for assistance.
+
+The Process Dispatch Framework .bprelease contains to the following assets:
+* Process
+  * Dispatched Process Monitor
+* Business Objects
+  * Template - Process Callback
+  * Utility - Process Dispatcher
+* Work Queues
+  * Dispatched Processes
+* Environment Variables
+  * Process Dispatcher Credential Name
+  * Queue: Dispatched Processes
