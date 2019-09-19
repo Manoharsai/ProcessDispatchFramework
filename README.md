@@ -19,4 +19,5 @@ The Process Dispatch Framework .bprelease contains to the following assets:
   * Dispatched Processes
 * Environment Variables
   * Process Dispatcher Credential Name
+  * Process Dispatcher Resource Pool
   * Queue: Dispatched Processes
