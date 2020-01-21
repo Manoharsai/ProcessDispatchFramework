@@ -1,6 +1,8 @@
 # Process Dispatch Framework
 A collection of assets that enable the asynchronous execution of Blue Prism processes via a web service call.
 
+Please review the Wiki page for release notes.
+
 <b>NOTE:</b> If you are not familiar with Blue Prism's support for web services, please review the Web Service User Guide available on the Blue Prism Portal.
 
 [Web Services User Guide](https://portal.blueprism.com/documents/standard?title=web+service)
