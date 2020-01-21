@@ -1,0 +1,840 @@
+﻿<process name="IBM BAW - Process Callback" version="1.0" bpversion="6.5.1.14401" narrative="This VBO provides a template action that can be used to perform a callback to an IBM Business Automation Workflow server after completing a Blue Prism process.&#xD;&#xA;&#xD;&#xA;Verion: 1.0" byrefcollection="true" type="object" runmode="Background" preferredid="173b5986-279f-4b45-ab27-1cf44164c9b0">
+  <appdef>
+    <element name="Application Root">
+      <id>68963025-1d92-49bc-b630-55f20123978c</id>
+      <type>Application</type>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <subsheet subsheetid="a4e2dd95-531a-401a-b1f1-0c4e7e15a5fe" type="CleanUp" published="True">
+    <name>Clean Up</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4" type="Normal" published="False">
+    <name>Execute Callback</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <stage stageid="1e0c26aa-3b20-41a8-9d3a-66614b3fda03" name="Start" type="Start">
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>7ec9fcef-5914-4573-a997-5f5ae4c2bcf2</onsuccess>
+  </stage>
+  <stage stageid="7ec9fcef-5914-4573-a997-5f5ae4c2bcf2" name="End" type="End">
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="b7ef4dd6-f3c2-4ce2-abf2-5e14fc30970a" name="Stage1" type="ProcessInfo">
+    <narrative>
+    </narrative>
+    <displayx>-180</displayx>
+    <displayy>-120</displayy>
+    <displaywidth>180</displaywidth>
+    <displayheight>120</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <references>
+      <reference>System.dll</reference>
+      <reference>System.Data.dll</reference>
+      <reference>System.Xml.dll</reference>
+      <reference>System.Drawing.dll</reference>
+      <reference>System.Core.dll</reference>
+      <reference>Newtonsoft.Json.dll</reference>
+    </references>
+    <imports>
+      <import>System</import>
+      <import>System.Drawing</import>
+      <import>System.Data</import>
+      <import>System.Xml</import>
+      <import>Newtonsoft.Json</import>
+    </imports>
+    <language>csharp</language>
+    <globalcode><![CDATA[]]></globalcode>
+    <code><![CDATA[// NOTE: Blue Prism input/output parameters are defined as attributes on Xml
+// elements. As such, the names in the Json will be prepended with a "@" 
+// character
+// Example:
+// <outputs>
+//    <output name='Param1' type='Text' value='This is a test.' />
+// </outputs>
+//
+// {
+//   "outputs": {
+//     "output": {
+//       "@name": "Param1",
+//       "@type": "Text",
+//       "@value": "This is a test."
+//     }
+//   }
+// }
+string convertXmlToJson(string inputXml)
+{
+	// Load the input Xml into an XmlDocument instance.
+	XmlDocument doc = new XmlDocument();
+	doc.LoadXml(inputXml);
+	
+	// Use Newtonsoft to convert the Xml document to Json.
+	return JsonConvert.SerializeXmlNode(doc);	
+}]]></code>
+  </stage>
+  <stage stageid="531f8c9c-c052-4a38-8528-66c7376e37f9" name="Clean Up" type="SubSheetInfo">
+    <subsheetid>a4e2dd95-531a-401a-b1f1-0c4e7e15a5fe</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-195</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="ec7b0982-0846-4779-9c2b-29e5fabb8591" name="Start" type="Start">
+    <subsheetid>a4e2dd95-531a-401a-b1f1-0c4e7e15a5fe</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>24501b81-0c73-4435-9dc4-627e46da84eb</onsuccess>
+  </stage>
+  <stage stageid="24501b81-0c73-4435-9dc4-627e46da84eb" name="End" type="End">
+    <subsheetid>a4e2dd95-531a-401a-b1f1-0c4e7e15a5fe</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>90</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="1b9b7638-35ce-45be-adc1-87bcd77b563e" name="Execute Callback" type="SubSheetInfo">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>-120</displayy>
+    <displaywidth>180</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="e6c3eb0c-cbd2-495b-8775-e4be19275bc0" name="Note1" type="Note">
+    <subsheetid>a4e2dd95-531a-401a-b1f1-0c4e7e15a5fe</subsheetid>
+    <narrative>Clean Up Page
+
+This is an optional page where you might choose to perform some finalisation (or "cleanup") tasks as your business object is closed down.
+
+The cleanup action will be called automatically immediately after closing your business object at the end of a business process.
+
+You will not be able to call this action from a business process, nor will it be called at any other time than before the disposal of the business object.</narrative>
+    <displayx>-180</displayx>
+    <displayy>60</displayy>
+    <displaywidth>180</displaywidth>
+    <displayheight>230</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="f8526a06-c77f-4b8b-8c06-723a843a6320" name="Note2" type="Note">
+    <narrative>Initialise Page
+
+This is an optional page where you might choose to perform some initialisation tasks after your business object is loaded.
+
+The initialise action will be called automatically immediately after loading your business object.
+
+You will not be able to call this action from a business process, nor will it be called at any other time than after the creation of the object.</narrative>
+    <displayx>-180</displayx>
+    <displayy>60</displayy>
+    <displaywidth>180</displaywidth>
+    <displayheight>230</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="9b1ae9a8-1d56-42c4-ad47-f2cf9eb45409" name="Start" type="Start">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="CallbackInfo" stage="CallbackInfo" />
+      <input type="text" name="ProcessResults" stage="ProcessResults" />
+    </inputs>
+    <onsuccess>ae875169-f2a4-414d-8ca9-3abe3e2b0170</onsuccess>
+  </stage>
+  <stage stageid="594ce468-5680-4650-8932-89b5250baefe" name="End" type="End">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>150</displayx>
+    <displayy>510</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+  </stage>
+  <stage stageid="2bd9d2a8-1769-4538-9109-5a588f425053" name="Note4" type="Note">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>**NOTE**
+
+This is an example callback implementation for IBM's Business Automation Workflow platform.
+
+THIS EXAMPLE IS INCOMPLETE.
+
+For this example to be fully functional, you must complete the logic after the "HTTP 200" check.</narrative>
+    <displayx>270</displayx>
+    <displayy>-165</displayy>
+    <displaywidth>420</displaywidth>
+    <displayheight>150</displayheight>
+    <font family="Segoe UI" size="12" style="Regular" color="0000FF" />
+  </stage>
+  <stage stageid="0975888e-1f56-4f91-bfc2-58e76edab86d" name="Get Authentication Token" type="Action">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit onsuccess="true" />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>45</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="refresh_groups" friendlyname="refresh_groups" narrative="Flag that indicates whether the current user's group membership should be refreshed in IBM Business Automation Workflow database." expr="[RefreshGroups]" />
+      <input type="number" name="requested_lifetime" friendlyname="requested_lifetime" narrative="Requested token lifetime in seconds (positive integer). Must be smaller than the maximum lifetime 7200." expr="[RequestedLifetime]" />
+      <input type="text" name="baw_url" friendlyname="baw_url" narrative="The base URL of the IBM BAW server." expr="[BAW URL]" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Response Content" friendlyname="Response Content" stage="Response Content" />
+      <output type="text" name="HTTP Status Code" friendlyname="HTTP Status Code" stage="HTTP Status Code" />
+      <output type="collection" name="Response Headers" friendlyname="Response Headers" stage="Response Headers" />
+      <output type="text" name="Request Data" friendlyname="Request Data" stage="Request Data" />
+      <output type="text" name="csrf_token" friendlyname="csrf_token" stage="csrf_token" />
+    </outputs>
+    <onsuccess>c64a295b-f9b4-4c6e-819f-582a4904f976</onsuccess>
+    <resource object="IBM BAW Process REST Interface" action="Get Authentication Token" />
+  </stage>
+  <stage stageid="b98fd1a6-1f21-4dc6-833f-ad118b194db7" name="Authenticate" type="Block">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>15</displayy>
+    <displaywidth>210</displaywidth>
+    <displayheight>60</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="33CCCC" />
+  </stage>
+  <stage stageid="389b28e6-ca8d-4cc3-91de-d222f03062af" name="Recover1" type="Recover">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>120</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>91def9b7-4f8c-47ba-b5df-ec4f5118ae37</onsuccess>
+  </stage>
+  <stage stageid="91def9b7-4f8c-47ba-b5df-ec4f5118ae37" name="Exception Detail" type="Calculation">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>210</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>50ad4513-d3fd-4d86-abaf-609f75caef7c</onsuccess>
+    <calculation expression="ExceptionDetail()" stage="Exception Details" />
+  </stage>
+  <stage stageid="50ad4513-d3fd-4d86-abaf-609f75caef7c" name="Resume" type="Resume">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>285</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>ca9f9cad-f5c1-4938-94ba-83bb28d0b5fe</onsuccess>
+  </stage>
+  <stage stageid="ca9f9cad-f5c1-4938-94ba-83bb28d0b5fe" name="Authentication Exception" type="Exception">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>360</displayx>
+    <displayy>45</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <exception localized="yes" type="System Exception" detail="&quot;The following exception was encounter while getting the authentication token: &quot; &amp; [Exception Details]" />
+  </stage>
+  <stage stageid="c64a295b-f9b4-4c6e-819f-582a4904f976" name="HTTP 201 Created?" type="Decision">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>105</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <decision expression="[HTTP Status Code] = &quot;201&quot;" />
+    <ontrue>ca8695e3-074e-4e7a-8882-024a1f1c678f</ontrue>
+    <onfalse>35a3785a-f261-4670-b6d0-3e6cf66a33e5</onfalse>
+  </stage>
+  <stage stageid="35a3785a-f261-4670-b6d0-3e6cf66a33e5" name="Token Exception" type="Exception">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>120</displayx>
+    <displayy>105</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <exception localized="yes" type="System Exception" detail="&quot;An error was returned while getting the authentication token. Response content: &quot; &amp; [Response Content] &amp; &quot;, HTTP status code: &quot; &amp; [HTTP Status Code]" />
+  </stage>
+  <stage stageid="6fcc2a4e-98a2-4a62-8bdf-c419b75577cc" name="RefreshGroups" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>105</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">false</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="08e0d3c6-a953-4f33-9ee2-82f2e78508be" name="RequestedLifetime" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>A parameter passed to IBM BAW that impacts the time-to-live of the authentication token.</narrative>
+    <displayx>-240</displayx>
+    <displayy>135</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>number</datatype>
+    <initialvalue>7200</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="f47d18b8-64b0-4c37-8e74-7e3123364d74" name="BAW URL" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>The base URL of the IBM BAW instance.</narrative>
+    <displayx>-240</displayx>
+    <displayy>75</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="25b25918-5a7c-47f0-a6cb-691a6e42e876" name="csrf_token" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>The authentication token returned by IBM BAW.</narrative>
+    <displayx>-240</displayx>
+    <displayy>165</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="793868ce-66a9-41a2-a331-b88231a293c3" name="Request Data" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>375</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="edff6651-71ba-4504-b101-a23d801768e8" name="Response Headers" type="Collection">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>405</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="3ac87dbd-b575-438f-b25b-b05e5a25f484" name="HTTP Status Code" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>345</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="03eb60c5-8efb-43af-b4d2-ad3c42af975f" name="Response Content" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>435</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="b4dc0c3c-2cc9-48e8-a7e1-ae95eedcf2fa" name="Input" type="Block">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>-330</displayx>
+    <displayy>-60</displayy>
+    <displaywidth>180</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="621d7388-a7af-4dcb-b302-7395eb98ec28" name="CallbackInfo" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>-30</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="58738f61-365c-420e-bade-744d8127a669" name="ProcessResults" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>0</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="cbb4e94f-cb9b-44af-b5d5-5a1818821cce" name="Local Values" type="Block">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>-330</displayx>
+    <displayy>45</displayy>
+    <displaywidth>180</displaywidth>
+    <displayheight>450</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="CCFFCC" />
+  </stage>
+  <stage stageid="3047c665-6dbd-4f42-9e43-a189dc567af2" name="Exception Details" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>465</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="ca8695e3-074e-4e7a-8882-024a1f1c678f" name="Claim User Task" type="Action">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit onsuccess="true" />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>165</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="task_id" friendlyname="task_id" narrative="User task instance ID." expr="[Task ID]" />
+      <input type="text" name="optional_parts" friendlyname="optional_parts" narrative="A comma-separated list of optional parts to be returned in the response object. Valid values are: 'data', 'actions', 'team_details', 'container_data'." expr="" />
+      <input type="text" name="csrf_token" friendlyname="csrf_token" narrative="IBM generated security token." expr="[csrf_token]" />
+      <input type="text" name="baw_url" friendlyname="baw_url" narrative="The base URL of the IBM BAW server." expr="[BAW URL]" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Response Content" friendlyname="Response Content" stage="Response Content" />
+      <output type="text" name="HTTP Status Code" friendlyname="HTTP Status Code" stage="HTTP Status Code" />
+      <output type="collection" name="Response Headers" friendlyname="Response Headers" stage="Response Headers" />
+      <output type="text" name="Request Data" friendlyname="Request Data" stage="Request Data" />
+    </outputs>
+    <onsuccess>50ee1c99-5315-4eea-ab76-7a369366dc02</onsuccess>
+    <resource object="IBM BAW Process REST Interface" action="Claim User Task" />
+  </stage>
+  <stage stageid="8387a66b-89a0-4e81-976b-546096fa82cf" name="Task ID" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>The unique identifier of the task within the IBM BAW system that we are calling back to.</narrative>
+    <displayx>-240</displayx>
+    <displayy>225</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="50ee1c99-5315-4eea-ab76-7a369366dc02" name="HTTP 200 OK?" type="Decision">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>225</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <decision expression="[HTTP Status Code] = &quot;200&quot;" />
+    <ontrue>7538885e-930d-49d1-b5dc-b5ee38dd0d2a</ontrue>
+    <onfalse>13898cb5-79ed-43c1-b3e9-75306fe83cc0</onfalse>
+  </stage>
+  <stage stageid="d45c14ed-ecd7-4618-b9c2-ce46d0280504" name="Fail User Task" type="Action">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit onsuccess="true" />
+    <narrative>
+    </narrative>
+    <displayx>225</displayx>
+    <displayy>450</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="task_id" friendlyname="task_id" narrative="User task instance ID." expr="[Task ID]" />
+      <input type="text" name="optional_parts" friendlyname="optional_parts" narrative="A comma-separated list of optional parts to be returned in the response object. Valid values are: 'data', 'actions', 'team_details', 'container_data'." expr="" />
+      <input type="text" name="csrf_token" friendlyname="csrf_token" narrative="IBM generated security token." expr="[csrf_token]" />
+      <input type="text" name="error_code" friendlyname="error_code" narrative="The error code to pass to the IBM task." expr="[Task Error Code]" />
+      <input type="text" name="error_message" friendlyname="error_message" narrative="An error message to pass to the IBMtask." expr="[Task Error Message]" />
+      <input type="text" name="baw_url" friendlyname="baw_url" narrative="The base URL of the IBM BAW server." expr="[BAW URL]" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Response Content" friendlyname="Response Content" stage="Response Content" />
+      <output type="text" name="HTTP Status Code" friendlyname="HTTP Status Code" stage="HTTP Status Code" />
+      <output type="collection" name="Response Headers" friendlyname="Response Headers" stage="Response Headers" />
+      <output type="text" name="Request Data" friendlyname="Request Data" stage="Request Data" />
+    </outputs>
+    <onsuccess>594ce468-5680-4650-8932-89b5250baefe</onsuccess>
+    <resource object="IBM BAW Process REST Interface" action="Complete User Task With Error" />
+  </stage>
+  <stage stageid="7538885e-930d-49d1-b5dc-b5ee38dd0d2a" name="Complete or Fail?" type="ChoiceStart">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>405</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <groupid>df88dc4e-0945-45b4-bf6f-0e086442bbf2</groupid>
+    <choices>
+      <choice expression="[ProcessResults] = True">
+        <name>Complete</name>
+        <distance>60</distance>
+        <ontrue>c9e740b1-2803-4a0e-bc6c-fee3d5d18cc5</ontrue>
+      </choice>
+      <choice expression="[ProcessResults] = False">
+        <name>Fail</name>
+        <distance>210</distance>
+        <ontrue>d45c14ed-ecd7-4618-b9c2-ce46d0280504</ontrue>
+      </choice>
+    </choices>
+  </stage>
+  <stage stageid="af28b927-8b26-444f-8674-3f31a7d93c2f" name="Otherwise1" type="ChoiceEnd">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>285</displayx>
+    <displayy>405</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>07c2ab2f-38c3-46c5-a567-9331cfe9f693</onsuccess>
+    <groupid>df88dc4e-0945-45b4-bf6f-0e086442bbf2</groupid>
+  </stage>
+  <stage stageid="c9e740b1-2803-4a0e-bc6c-fee3d5d18cc5" name="Complete User Task" type="Action">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit onsuccess="true" />
+    <narrative>
+    </narrative>
+    <displayx>75</displayx>
+    <displayy>450</displayy>
+    <displaywidth>90</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="task_id" friendlyname="task_id" narrative="User task instance ID." expr="[Task ID]" />
+      <input type="text" name="optional_parts" friendlyname="optional_parts" narrative="A comma-separated list of optional parts to be returned in the response object. Valid values are: 'data', 'actions', 'team_details', 'container_data'." expr="" />
+      <input type="text" name="csrf_token" friendlyname="csrf_token" narrative="IBM generated security token." expr="[csrf_token]" />
+      <input type="text" name="output" friendlyname="output" narrative="Output data from the specified IBM process. Presented in the form of a JSON object." expr="[Task Output]" />
+      <input type="text" name="baw_url" friendlyname="baw_url" narrative="The base URL of the IBM BAW server." expr="[BAW URL]" />
+    </inputs>
+    <outputs>
+      <output type="text" name="Response Content" friendlyname="Response Content" stage="Response Content" />
+      <output type="text" name="HTTP Status Code" friendlyname="HTTP Status Code" stage="HTTP Status Code" />
+      <output type="collection" name="Response Headers" friendlyname="Response Headers" stage="Response Headers" />
+      <output type="text" name="Request Data" friendlyname="Request Data" stage="Request Data" />
+    </outputs>
+    <onsuccess>594ce468-5680-4650-8932-89b5250baefe</onsuccess>
+    <resource object="IBM BAW Process REST Interface" action="Complete User Task" />
+  </stage>
+  <stage stageid="13898cb5-79ed-43c1-b3e9-75306fe83cc0" name="User Task Exception" type="Exception">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>120</displayx>
+    <displayy>225</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <exception localized="yes" type="System Exception" detail="&quot;An error was returned while trying to claim the user task. Response content: &quot; &amp; [Response Content] &amp; &quot;, HTTP status code: &quot; &amp; [HTTP Status Code]" />
+  </stage>
+  <stage stageid="e829be55-d22c-4f2c-95e5-64b603bbd786" name="Note5" type="Note">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit onsuccess="true" />
+    <narrative>**NOTE**
+
+You must add logic to parse the response data from your Blue Prism process to determine whether you should complete the IBM task successfully or with an error. Then you must adjust the multi-decision stage below to account for your specific Blue Prism process data.</narrative>
+    <displayx>15</displayx>
+    <displayy>315</displayy>
+    <displaywidth>240</displaywidth>
+    <displayheight>120</displayheight>
+    <font family="Segoe UI" size="12" style="Regular" color="0000FF" />
+  </stage>
+  <stage stageid="07c2ab2f-38c3-46c5-a567-9331cfe9f693" name="No Option Exception" type="Exception">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>375</displayx>
+    <displayy>405</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <exception localized="yes" type="Application Exception" detail="&quot;Unable to determine whether the BAW task should be completed or failed.&quot;" />
+  </stage>
+  <stage stageid="118fd195-29ed-4b97-9feb-ed46ce19838e" name="Task Error Code" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>An error code to pass to IBM BAW in the event that the Blue Prism process completed with an error/exception.</narrative>
+    <displayx>-240</displayx>
+    <displayy>285</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="531d6ce8-7ac3-474c-85e5-9b548f621eb3" name="Task Error Message" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>A message to pass to the IBM BAW task in the event the Blue Prism process completed with an error or failed output.</narrative>
+    <displayx>-240</displayx>
+    <displayy>315</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="d4436fb0-56dd-49db-955a-e52581508a11" name="Task Output" type="Data">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>A JSON blob that can be passed to the IBM BAW task to use as its output when completing.</narrative>
+    <displayx>-240</displayx>
+    <displayy>255</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="079a6830-17e4-4b7c-9868-e1c4dcc1799b" name="Note5" type="Note">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit onsuccess="true" />
+    <narrative>**NOTE**
+
+Make sure to set the value of your IBM BAW instance URL.</narrative>
+    <displayx>-405</displayx>
+    <displayy>90</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>90</displayheight>
+    <font family="Segoe UI" size="12" style="Regular" color="0000FF" />
+  </stage>
+  <stage stageid="ae875169-f2a4-414d-8ca9-3abe3e2b0170" name="JSON to Collection" type="Action">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit onsuccess="true" />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-60</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <inputs>
+      <input type="text" name="json" friendlyname="json" expr="[CallbackInfo]" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Result" friendlyname="Result" stage="Callback Data" />
+    </outputs>
+    <onsuccess>8e0da3f8-85d2-4417-ba0f-1d76a91529ef</onsuccess>
+    <resource object="Utility - JSON" action="JSON to Collection" />
+  </stage>
+  <stage stageid="46b7e8dd-5942-40cd-b70c-bc3c3d42a978" name="Callback Data" type="Collection">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>-240</displayx>
+    <displayy>195</displayy>
+    <displaywidth>150</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="8e0da3f8-85d2-4417-ba0f-1d76a91529ef" name="Set Task ID" type="Calculation">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>15</displayx>
+    <displayy>-15</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>0975888e-1f56-4f91-bfc2-58e76edab86d</onsuccess>
+    <calculation expression="[Callback Data.task_id]" stage="Task ID" />
+  </stage>
+  <stage stageid="853b0541-db81-42cd-81c5-27998d0f8067" name="Claim Task" type="Block">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>-45</displayx>
+    <displayy>135</displayy>
+    <displaywidth>210</displaywidth>
+    <displayheight>60</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="FF6600" />
+  </stage>
+  <stage stageid="663fd819-9900-4419-8c95-932f2b539f4b" name="Recover2" type="Recover">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>120</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>b7eacc1b-97e3-4eac-b012-3d7c2835aea6</onsuccess>
+  </stage>
+  <stage stageid="b7eacc1b-97e3-4eac-b012-3d7c2835aea6" name="Exception Detail" type="Calculation">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>210</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>f1a3bb75-5fd4-4fea-a5e2-bceac4f79d54</onsuccess>
+    <calculation expression="ExceptionDetail()" stage="Exception Details" />
+  </stage>
+  <stage stageid="f1a3bb75-5fd4-4fea-a5e2-bceac4f79d54" name="Resume" type="Resume">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <loginhibit />
+    <narrative>
+    </narrative>
+    <displayx>285</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <onsuccess>3ebd5628-6d09-409a-a10e-6855f1d154a5</onsuccess>
+  </stage>
+  <stage stageid="3ebd5628-6d09-409a-a10e-6855f1d154a5" name="Claim Exception" type="Exception">
+    <subsheetid>5b21dbc3-b91f-4e26-8ab5-3a8b36816fd4</subsheetid>
+    <narrative>
+    </narrative>
+    <displayx>360</displayx>
+    <displayy>165</displayy>
+    <displaywidth>60</displaywidth>
+    <displayheight>30</displayheight>
+    <font family="Segoe UI" size="10" style="Regular" color="000000" />
+    <exception localized="yes" type="Application Exception" detail="&quot;The following exception was encounter while trying to claim the task '&quot; &amp; [Task ID] &amp; &quot;': &quot; &amp; [Exception Details]" />
+  </stage>
+</process>
