@@ -21,3 +21,5 @@ The Process Dispatch Framework .bprelease contains to the following assets:
   * Process Dispatcher Credential Name
   * Process Dispatcher Resource Pool
   * Queue: Dispatched Processes
+
+<b>NOTE:</b> Example implementations of callback objects are now located in the <i>Example Callback VBOs</i> folder.
